@@ -89,3 +89,32 @@ query TeacherRatingsPageQuery(
   }
 }
 `;
+
+export const RatingsEdgesQuery = gql`
+  query RatingsEdgesQuery($count: Int!, $id: ID!, $courseFilter: String, $cursor: String) {
+    node(id: $id) {
+      ... on Teacher {
+        firstName
+        lastName
+        ratings(first: $count, after: $cursor, courseFilter: $courseFilter) {
+          edges {
+            cursor
+            node {
+              class
+              clarityRating
+              difficultyRating
+              comment
+              flagStatus
+              createdByUser
+              teacherNote {
+                id
+              }
+              id
+              __typename
+            }
+          }
+        }
+      }
+    }
+  }
+`;

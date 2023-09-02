@@ -23,15 +23,18 @@ test('search for teacher', async t => {
 
 test('search for non-existent teacher', async t => {
   const teachers = await ratings.searchTeacher('this teacher does not exist', michiganTechID);
-
   t.is(teachers.length, 0);
 });
 
 test('get details of teacher', async t => {
   const teacher = await ratings.getTeacher('VGVhY2hlci0yMjkxNjI=');
-
   t.is(teacher.firstName, 'Ching-Kuang');
   t.is(teacher.lastName, 'Shene');
+});
+
+test('get ratings of teacher', async t => {
+  const teacher = await ratings.getClassRatingbyTeacher('VGVhY2hlci0yMjkwMzc2','CECS327');
+  console.log(teacher)
 });
 
 test('get details with invalid ID', async t => {
